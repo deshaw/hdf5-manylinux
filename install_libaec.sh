@@ -4,11 +4,11 @@ set -euo pipefail
 
 pushd /tmp
 
-aec_version="1.1.3"
+aec_version="1.1.4"
 
 echo "Downloading libaec"
 # The URL includes a hash, so it needs to change if the version does
-curl -fsSLO https://gitlab.dkrz.de/-/project/117/uploads/dc5fc087b645866c14fa22320d91fb27/libaec-${aec_version}.tar.gz
+curl -fsSLO https://gitlab.dkrz.de/-/project/117/uploads/d19a8ba56f9d578e4d8da96d01217f3e/libaec-${aec_version}.tar.gz
 tar zxf libaec-$aec_version.tar.gz
 
 echo "Building & installing libaec"
