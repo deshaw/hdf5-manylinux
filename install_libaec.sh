@@ -7,20 +7,19 @@ pushd /tmp
 aec_version="1.1.4"
 
 echo "Downloading libaec"
-# The URL includes a hash, so it needs to change if the version does
-curl -fsSLO https://gitlab.dkrz.de/-/project/117/uploads/d19a8ba56f9d578e4d8da96d01217f3e/libaec-${aec_version}.tar.gz
-tar zxf libaec-$aec_version.tar.gz
+curl -fsSLO https://gitlab.dkrz.de/k202009/libaec/-/archive/v${aec_version}/libaec-v${aec_version}.tar.gz
+tar zxf libaec-v$aec_version.tar.gz
 
 echo "Building & installing libaec"
-pushd libaec-$aec_version
+pushd libaec-v$aec_version
 mkdir build
 cmake -S . -B build \
     -D CMAKE_BUILD_TYPE=Release \
     -D BUILD_STATIC_LIBS=OFF \
     -D BUILD_TESTING=OFF
-make -C build -j $(nproc)
+make -C build -j "$(nproc)"
 make -C build install
 
 # Clean up the files from the build
 popd
-rm -r libaec-$aec_version libaec-$aec_version.tar.gz
+rm -r libaec-v$aec_version libaec-v$aec_version.tar.gz

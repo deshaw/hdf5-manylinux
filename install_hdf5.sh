@@ -22,7 +22,7 @@ fi
 echo "Downloading & unpacking HDF5 ${HDF5_VERSION}"
 HDF5_TAG="hdf5_${HDF5_VERSION}"
 curl -fsSLO "https://github.com/HDFGroup/hdf5/archive/refs/tags/${HDF5_TAG}.tar.gz"
-tar -xzvf $HDF5_TAG.tar.gz
+tar -xzf $HDF5_TAG.tar.gz
 pushd hdf5-$HDF5_TAG
 
 echo "Configuring, building & installing HDF5 ${HDF5_VERSION} to ${HDF5_DIR}"
