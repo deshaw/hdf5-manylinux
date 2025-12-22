@@ -38,7 +38,7 @@ cmake -S . -B build \
     -D HDF5_ALLOW_EXTERNAL_SUPPORT:STRING=NO \
     -D HDF5_ENABLE_ZLIB_SUPPORT=ON \
     -D HDF5_ENABLE_SZIP_SUPPORT=ON \
-    -D libaec_DIR=/usr/local/lib
+    -D libaec_ROOT=/usr/local
 
 make -C build -j "$NPROC"
 make -C build install
