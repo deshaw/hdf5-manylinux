@@ -37,10 +37,9 @@ cmake -S . -B build \
     -D HDF5_BUILD_UTILS=OFF \
     -D HDF5_ALLOW_EXTERNAL_SUPPORT:STRING=NO \
     -D HDF5_ENABLE_ZLIB_SUPPORT=ON \
-    -D HDF5_ENABLE_SZIP_SUPPORT=ON \
-    -D libaec_ROOT=/usr/local
+    -D HDF5_ENABLE_SZIP_SUPPORT=ON
 
-make -C build -j "$NPROC"
+make -C build -j "$(nproc)"
 make -C build install
 popd
 

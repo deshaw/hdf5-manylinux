@@ -13,9 +13,13 @@ tar zxf libaec-$aec_version.tar.gz
 
 echo "Building & installing libaec"
 pushd libaec-$aec_version
-./configure
-make
-make install
+mkdir build
+cmake -S . -B build \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D BUILD_STATIC_LIBS=OFF \
+    -D BUILD_TESTING=OFF
+make -C build -j $(nproc)
+make -C build install
 
 # Clean up the files from the build
 popd
