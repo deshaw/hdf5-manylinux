@@ -22,14 +22,25 @@ fi
 echo "Downloading & unpacking HDF5 ${HDF5_VERSION}"
 HDF5_TAG="hdf5_${HDF5_VERSION}"
 curl -fsSLO "https://github.com/HDFGroup/hdf5/archive/refs/tags/${HDF5_TAG}.tar.gz"
-tar -xzvf $HDF5_TAG.tar.gz
+tar -xzf $HDF5_TAG.tar.gz
 pushd hdf5-$HDF5_TAG
-chmod u+x autogen.sh
 
 echo "Configuring, building & installing HDF5 ${HDF5_VERSION} to ${HDF5_DIR}"
-./configure --prefix $HDF5_DIR --enable-build-mode=production --with-szlib
-make -j $(nproc)
-make install
+mkdir build
+cmake -S . -B build \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_INSTALL_PREFIX="$HDF5_DIR" \
+    -D BUILD_TESTING=OFF \
+    -D BUILD_STATIC_LIBS=OFF \
+    -D HDF5_BUILD_EXAMPLES=OFF \
+    -D HDF5_BUILD_TOOLS=OFF \
+    -D HDF5_BUILD_UTILS=OFF \
+    -D HDF5_ALLOW_EXTERNAL_SUPPORT:STRING=NO \
+    -D HDF5_ENABLE_ZLIB_SUPPORT=ON \
+    -D HDF5_ENABLE_SZIP_SUPPORT=ON
+
+make -C build -j "$(nproc)"
+make -C build install
 popd
 
 # Clean up to limit the size of the Docker image
